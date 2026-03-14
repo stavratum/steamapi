@@ -3,7 +3,7 @@
 key = ""
 
 # SteamID
-# https://steamid.pro/lookup
+# https://steamid.io/lookup
 steamid = "76561198845412957"
 
 #
@@ -63,20 +63,12 @@ while True:
                 case _:
                     badappend(f"{key} = {v}")
 
-            # update the fallback file
             with open("player_data.txt", 'w') as fd:
                 fd.write(
                     json.dumps(player_data)
                 )
 
-    
-    # requesting summaries every 1-5 minutes ensures a nice update rate.
-    # i believe 1 minute is the best. maybe this is all just placebo,
-    # but it gave me a good guess of someones timezone or EVEN sleeping schedule
+        # https://steamcommunity.com/comment/Profile/render/76561198845412957/?start=0&&count=1
+        # https://stackoverflow.com/questions/47526053/python-parsing-comments-from-steam
+
     time.sleep(300)
-
-    # TODO: add clans and friend list updates (well i cant sleep until this is DOOONEEEE theyre in my HEAD theyre in my SOUL)
-    # why does steam show somebody online then offline a lot? is this when ur on phone or wat
-
-# is this unnecessary
-player_history_fd.close()
