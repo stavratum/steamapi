@@ -1,0 +1,1 @@
+python "D:\steam\main.py"

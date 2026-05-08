@@ -15,7 +15,8 @@ import json
 import time
 import os
 
-player_summaries_endpoint = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={steamid}"
+endpoint_player_summaries = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={steamid}"
+endpoint_comments_profile = f"https://steamcommunity.com/comment/Profile/render/{steamid}/?start=0"
 player_data               = {}
 
 #
@@ -39,7 +40,11 @@ if os.path.exists("player_data.txt"):
         )
 
 while True:
-    player_summaries = requests.get(player_summaries_endpoint).json()
+    player_summaries = requests.get(endpoint_player_summaries).json()
+    #profile_comments = requests.get(endpoint_comments_profile).json()
+
+    # import xml.etree.ElementTree as ET
+    #if (profile_comments["success"]):
 
     for key, v in player_summaries["response"]["players"][0].items():
         if player_data.get(key) != v:
@@ -68,7 +73,8 @@ while True:
                     json.dumps(player_data)
                 )
 
-        # https://steamcommunity.com/comment/Profile/render/76561198845412957/?start=0&&count=1
+        # https://steamcommunity.com/comment/Profile/render/76561198845412957/?start=0
+        # timelastpost
         # https://stackoverflow.com/questions/47526053/python-parsing-comments-from-steam
 
     time.sleep(300)
